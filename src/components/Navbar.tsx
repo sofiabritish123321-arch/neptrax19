@@ -94,7 +94,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
               </button>
             ))}
             <button
-              onClick={() => handleNavigate('contact')}
+              onClick={() => window.open('https://cal.com/neptrax', '_blank')}
               className="relative px-4 lg:px-6 py-2.5 rounded-full bg-gradient-to-r from-[#2563eb] to-[#1e3a8a] text-white font-medium text-sm lg:text-base hover:scale-105 transition-all duration-300 overflow-hidden group"
             >
               <span className="relative z-10">Book a Call</span>
