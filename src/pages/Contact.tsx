@@ -113,7 +113,7 @@ export default function Contact({ onNavigate }: ContactProps) {
             Schedule a free consultation call to discuss your project in detail
           </p>
           <button
-            onClick={() => onNavigate('contact')}
+            onClick={() => window.open('https://cal.com/neptrax', '_blank')}
             className="px-8 py-3 rounded-full bg-[#f1f5f9] text-[#0d1117] font-medium hover:scale-105 transition-all"
           >
             Book a Call
