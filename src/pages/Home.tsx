@@ -295,7 +295,7 @@ export default function Home({ onNavigate }: HomeProps) {
 
           <ScrollReveal direction="up" delay={250} duration={0.8}>
             <EnhancedButton
-              onClick={() => onNavigate('contact')}
+              onClick={() => window.open('https://cal.com/neptrax', '_blank')}
               variant="primary"
               size="lg"
             >
