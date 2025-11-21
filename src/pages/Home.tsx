@@ -124,7 +124,7 @@ export default function Home({ onNavigate }: HomeProps) {
   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-12 sm:mb-16 justify-center lg:justify-start px-4 sm:px-0">
     {/* Book a Call Button */}
     <motion.button
-      onClick={() => onNavigate('contact')}
+      onClick={() => window.open('https://cal.com/neptrax', '_blank')}
       className="px-8 sm:px-12 md:px-16 py-3 sm:py-4 rounded-full bg-gradient-to-r from-[#2563eb] to-[#1e3a8a] text-[#f1f5f9] font-medium hover:scale-105 hover:shadow-[0_0_30px_rgba(37,99,235,0.6)] transition-all duration-300 text-sm sm:text-base"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
