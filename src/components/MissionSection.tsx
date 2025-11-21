@@ -98,7 +98,7 @@ export default function MissionSection() {
               <div className="relative group">
                 <div className="rounded-2xl overflow-hidden shadow-[0_0_60px_rgba(37,99,235,0.3)]">
                   <img
-                    src="public/home.jpg"
+                    src="public/home.png"
                     alt="Jeton Project"
                     className="w-full h-[540px] object-cover transition-all duration-500 group-hover:brightness-110"
                   />
