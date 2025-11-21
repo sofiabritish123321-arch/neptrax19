@@ -171,7 +171,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
           {/* Mobile Menu CTA */}
           <div className="px-6 py-6 border-t border-white/10">
             <button
-              onClick={() => handleNavigate('contact')}
+              onClick={() => window.open('https://cal.com/neptrax', '_blank')}
               className="w-full px-6 py-4 rounded-full bg-gradient-to-r from-[#2563eb] to-[#1e3a8a] text-white font-medium text-base hover:scale-105 transition-all duration-300 relative overflow-hidden group"
             >
               <span className="relative z-10">Book a Call</span>
