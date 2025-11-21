@@ -11,10 +11,40 @@ export default function Contact({ onNavigate }: ContactProps) {
     email: '',
     message: '',
   });
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setStatus('loading');
+    setErrorMessage('');
+
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+      const response = await fetch(`${apiUrl}/api/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message');
+      }
+
+      setStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+
+      setTimeout(() => {
+        setStatus('idle');
+      }, 5000);
+    } catch (error) {
+      setStatus('error');
+      setErrorMessage(error instanceof Error ? error.message : 'Failed to send message. Please try again.');
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -91,12 +121,38 @@ export default function Contact({ onNavigate }: ContactProps) {
               />
             </div>
 
+            {status === 'success' && (
+              <div className="bg-green-500/10 border border-green-500/50 rounded-xl p-4 mb-4">
+                <p className="text-green-400 text-center font-medium">
+                  Message sent successfully! We'll get back to you soon.
+                </p>
+              </div>
+            )}
+
+            {status === 'error' && (
+              <div className="bg-red-500/10 border border-red-500/50 rounded-xl p-4 mb-4">
+                <p className="text-red-400 text-center font-medium">
+                  {errorMessage}
+                </p>
+              </div>
+            )}
+
             <button
               type="submit"
-              className="w-full px-6 py-4 rounded-full bg-gradient-to-r from-[#2563eb] to-[#1e3a8a] text-[#f1f5f9] font-medium hover:scale-105 hover:shadow-[0_0_30px_rgba(37,99,235,0.6)] transition-all flex items-center justify-center gap-2"
+              disabled={status === 'loading'}
+              className="w-full px-6 py-4 rounded-full bg-gradient-to-r from-[#2563eb] to-[#1e3a8a] text-[#f1f5f9] font-medium hover:scale-105 hover:shadow-[0_0_30px_rgba(37,99,235,0.6)] transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
-              Send Message
-              <Send size={18} />
+              {status === 'loading' ? (
+                <>
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  Sending...
+                </>
+              ) : (
+                <>
+                  Send Message
+                  <Send size={18} />
+                </>
+              )}
             </button>
           </form>
 
